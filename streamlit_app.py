@@ -73,5 +73,4 @@ if not data.empty:
     plt.xlabel('Marital Status')
     plt.ylabel('Frequency')
     st.pyplot(fig)
-```
 
