@@ -1,6 +1,3 @@
-Here's a Python code snippet adapted for the variables you've discussed, formatted for use with Streamlit. This code incorporates mappings and variable names based on the CPS data you provided earlier:
-
-```python
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
@@ -78,4 +75,3 @@ if not data.empty:
     st.pyplot(fig)
 ```
 
-This script should give you a functional Streamlit application to analyze and visualize the specified CPS data fields. Adjust the file path and mappings as necessary to fit your actual dataset.
