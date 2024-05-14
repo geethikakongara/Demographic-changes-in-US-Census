@@ -14,7 +14,7 @@ marital_status_mapping = {7: "Never married", 5: "Divorced", 2: "Married, Armed 
 
 # Function to load data from a local file
 def load_data():
-    df = pd.read_csv('Us_data.csv')
+    df = pd.read_csv('US Census.csv')
     df.dropna(inplace=True)  # Ensuring no missing values
     df['PESEX'] = df['PESEX'].map(sex_mapping)
     df['HEFAMINC'] = df['HEFAMINC'].map(income_mapping)
