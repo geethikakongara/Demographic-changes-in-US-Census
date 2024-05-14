@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Define mappings for your specific variables
 sex_mapping = {1: 'Male', 2: 'Female'}
@@ -67,7 +68,7 @@ if not data.empty:
 
     # Plots
     st.write("### Gender Distribution")
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(8, 6))
     data['PESEX'].value_counts().plot(kind='bar', color='skyblue', ax=ax)
     plt.title('Gender Distribution')
     plt.xlabel('Gender')
@@ -75,17 +76,39 @@ if not data.empty:
     st.pyplot(fig)
 
     st.write("### Income Distribution")
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(10, 6))
     data['HEFAMINC'].value_counts().plot(kind='bar', color='lightgreen', ax=ax)
     plt.title('Income Distribution')
     plt.xlabel('Income Range')
     plt.ylabel('Frequency')
+    plt.xticks(rotation=45)
     st.pyplot(fig)
 
     st.write("### Marital Status Distribution")
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(8, 6))
     data['PRMARSTA'].value_counts().plot(kind='bar', color='salmon', ax=ax)
     plt.title('Marital Status Distribution')
     plt.xlabel('Marital Status')
     plt.ylabel('Frequency')
+    st.pyplot(fig)
+
+    # Compare distributions
+    st.write("### Compare Income Distribution by Gender")
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.countplot(x='HEFAMINC', hue='PESEX', data=data, ax=ax)
+    plt.title('Income Distribution by Gender')
+    plt.xlabel('Income Range')
+    plt.ylabel('Frequency')
+    plt.xticks(rotation=45)
+    plt.legend(title='Gender', loc='upper right')
+    st.pyplot(fig)
+
+    st.write("### Compare Marital Status Distribution by Gender")
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.countplot(x='PRMARSTA', hue='PESEX', data=data, ax=ax)
+    plt.title('Marital Status Distribution by Gender')
+    plt.xlabel('Marital Status')
+    plt.ylabel('Frequency')
+    plt.xticks(rotation=45)
+    plt.legend(title='Gender', loc='upper right')
     st.pyplot(fig)
