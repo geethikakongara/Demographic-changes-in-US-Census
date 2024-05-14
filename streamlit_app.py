@@ -28,7 +28,8 @@ def load_data():
     df['PESEX'] = df['PESEX'].map(sex_mapping)
     df['HEFAMINC'] = df['HEFAMINC'].map(income_mapping)
     df['PRMARSTA'] = df['PRMARSTA'].map(marital_status_mapping)
-    df['ST'] = df['ST'].map(state_mapping)
+    if 'ST' in df.columns:
+        df['ST'] = df['ST'].map(state_mapping)
     return df
 
 # Check if data is already loaded, if not load it
@@ -45,7 +46,10 @@ if not data.empty:
     gender_to_filter = st.sidebar.multiselect('Select Gender:', options=data['PESEX'].dropna().unique())
     income_to_filter = st.sidebar.multiselect('Select Income Range:', options=data['HEFAMINC'].dropna().unique())
     marital_status_to_filter = st.sidebar.multiselect('Select Marital Status:', options=data['PRMARSTA'].dropna().unique())
-    state_to_filter = st.sidebar.multiselect('Select State:', options=data['ST'].dropna().unique())
+    if 'ST' in data.columns:
+        state_to_filter = st.sidebar.multiselect('Select State:', options=data['ST'].dropna().unique())
+    else:
+        state_to_filter = []
 
     # Applying filters
     if gender_to_filter:
@@ -54,7 +58,7 @@ if not data.empty:
         data = data[data['HEFAMINC'].isin(income_to_filter)]
     if marital_status_to_filter:
         data = data[data['PRMARSTA'].isin(marital_status_to_filter)]
-    if state_to_filter:
+    if 'ST' in data.columns and state_to_filter:
         data = data[data['ST'].isin(state_to_filter)]
 
     # Displaying data and statistics
